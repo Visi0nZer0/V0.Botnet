@@ -1,0 +1,30 @@
+import socket
+import json
+
+# Server address and port
+server_address = ('127.0.0.1', 9000)
+
+# JSON request data
+json_data = {
+    "success": True,
+    "message": "Hello from Client!"
+}
+
+# Convert JSON to string
+json_str = json.dumps(json_data)
+
+# Create a socket
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+try:
+    # Connect to the server
+    client_socket.connect(server_address)
+
+    # Send JSON request
+    client_socket.sendall(json_str.encode('utf-8'))
+
+    print("JSON request sent successfully")
+
+finally:
+    # Close the socket
+    client_socket.close()
